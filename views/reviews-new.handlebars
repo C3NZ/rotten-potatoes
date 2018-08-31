@@ -1,0 +1,24 @@
+<form method="POST" action="/reviews">
+	<fieldset>
+		<legend>New Review</legend>
+		
+		<!--Review title-->
+		<p>
+			<label for="review-title">Title</label><br>
+			<input type="text" name="title" id="review-title">
+		</p>
+		<!--Movie title-->
+		<p>
+			<label for="movie-title">Movie title</label><br>
+			<input type="text" name="movieTitle" id="movie-title">
+		</p>
+		<p>
+			<label for="movie-review">Review</label></br>
+			<textarea rows="4" cols="50" name="review" placeholder="Enter your review" id="movie-review"></textarea>
+		</p>
+	</fieldset>
+
+	<p>
+		<button type="submit">Save review</button>
+	</p>
+</form>
