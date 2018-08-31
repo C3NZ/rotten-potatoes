@@ -8,7 +8,8 @@ mongoose.connect("mongodb://localhost/rotten-potatoes", {useNewUrlParser: true})
 const Review = mongoose.model("Review", {
 	title: String,
 	movieTitle: String,
-	review: String
+	review: String,
+	rating: Number
 });
 
 var exphbs = require("express-handlebars");
