@@ -8,11 +8,14 @@
 		<p>Movie rating: {{review.rating}}</p>
 
 		<p><a href="/reviews/{{review._id}}/edit">Edit</a></p>
-		
 		<p>
 			<form method="POST" action="/reviews/{{review.id}}?_method=DELETE">
 				<button class="btn btn-primary" type="submit">Delete</button>
 			</form>
 		</p>
+
+		<hr>
+
+		{{> comment-form}}
 	</div>
 </div>
