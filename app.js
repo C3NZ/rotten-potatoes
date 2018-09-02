@@ -10,6 +10,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rotten-potatoes
 
 //Routers
 const reviews = require("./controllers/reviews");
+const comments = require("./controllers/comments");
 
 var exphbs = require("express-handlebars");
 app.engine("handlebars", exphbs({defaultLayout:"main"}));
@@ -19,6 +20,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use('/', reviews);
+app.use('/reviews/comments', comments);
 
 app.listen(3000, () => {
 	console.log("App listening on port 3000");

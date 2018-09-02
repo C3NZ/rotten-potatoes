@@ -17,5 +17,9 @@
 		<hr>
 
 		{{> comment-form}}
+		
+		{{#each comments}}
+			{{> comment}}
+		{{/each}}
 	</div>
 </div>

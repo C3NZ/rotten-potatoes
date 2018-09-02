@@ -1,6 +1,9 @@
 const express = require("express");
 const router = express.Router();
+
+//Models
 const Review = require("../models/review");
+const Comment = require("../models/comment");
 
 router.get("/", (req, res) => {
 	Review.find()
@@ -19,7 +22,10 @@ router.get("/reviews/new", (req, res) => {
 router.get("/reviews/:id", (req, res) => {
 	Review.findById(req.params.id)
 		.then(review => {
-			res.render("reviews-show", { review: review });
+			Comment.find({reviewId: review._id})
+				.then(comments => {
+					res.render("reviews-show", { review:review, comments:comments });
+				});		
 		})
 		.catch(err => {
 			console.log(err);
