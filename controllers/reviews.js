@@ -5,6 +5,16 @@ const router = express.Router();
 const Review = require("../models/review");
 const Comment = require("../models/comment");
 
+router.post("/", (req, res) => {
+	Review.create(req.body)
+		.then(review => {
+			res.redirect(`/reviews/${review._id}`);
+		})
+		.catch(err => {
+			console.log(err.message)
+		});
+});
+
 router.get("/new", (req, res) => {
 	res.render("reviews-new", {});
 });
@@ -20,22 +30,6 @@ router.get("/:id", (req, res) => {
 		.catch(err => {
 			console.log(err);
 		});
-});
-
-router.post("/", (req, res) => {
-	Review.create(req.body)
-		.then(review => {
-			res.redirect(`/reviews/${review._id}`);
-		})
-		.catch(err => {
-			console.log(err.message)
-		});
-});
-
-router.get("/:id/edit", (req, res) => {
-	Review.findById(req.params.id, function(err, review){ 
-		res.render("reviews-edit", { review : review });
-	});
 });
 
 router.put("/:id", (req, res) => {
@@ -57,6 +51,12 @@ router.delete("/:id", (req, res) => {
 		.catch(err => {
 			console.log(err.message);
 		});
+});
+
+router.get("/:id/edit", (req, res) => {
+	Review.findById(req.params.id, function(err, review){ 
+		res.render("reviews-edit", { review : review });
+	});
 });
 
 module.exports = router;
