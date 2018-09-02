@@ -1,7 +1,7 @@
+//Router for interacting with the reviews endpoint
 const express = require("express");
 const router = express.Router();
 
-//Models
 const Review = require("../models/review");
 const Comment = require("../models/comment");
 

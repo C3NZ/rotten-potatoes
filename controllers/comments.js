@@ -1,3 +1,4 @@
+//Router for creating & deleting comments
 const express = require("express");
 const router = express.Router();
 
