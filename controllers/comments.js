@@ -13,4 +13,15 @@ router.post("/", (req, res) => {
 		});
 });
 
+router.delete("/:id", (req, res) => {
+	console.log("DELETE comment");
+	Comment.findByIdAndRemove(req.params.id)
+		.then(comment => {
+			res.redirect(`/reviews/${comment.reviewId}`);
+		})
+		.catch(err => {
+			console.log(err);
+		});
+});
+
 module.exports = router;

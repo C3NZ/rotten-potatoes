@@ -5,21 +5,11 @@ const router = express.Router();
 const Review = require("../models/review");
 const Comment = require("../models/comment");
 
-router.get("/", (req, res) => {
-	Review.find()
-		.then(reviews => {
-			res.render("reviews-index", { reviews:reviews });
-		})
-		.catch(err => {
-			console.log(err.message);
-		});
-});
-
-router.get("/reviews/new", (req, res) => {
+router.get("/new", (req, res) => {
 	res.render("reviews-new", {});
 });
 
-router.get("/reviews/:id", (req, res) => {
+router.get("/:id", (req, res) => {
 	Review.findById(req.params.id)
 		.then(review => {
 			Comment.find({reviewId: review._id})
@@ -32,7 +22,7 @@ router.get("/reviews/:id", (req, res) => {
 		});
 });
 
-router.post("/reviews", (req, res) => {
+router.post("/", (req, res) => {
 	Review.create(req.body)
 		.then(review => {
 			res.redirect(`/reviews/${review._id}`);
@@ -42,13 +32,13 @@ router.post("/reviews", (req, res) => {
 		});
 });
 
-router.get("/reviews/:id/edit", (req, res) => {
+router.get("/:id/edit", (req, res) => {
 	Review.findById(req.params.id, function(err, review){ 
 		res.render("reviews-edit", { review : review });
 	});
 });
 
-router.put("/reviews/:id", (req, res) => {
+router.put("/:id", (req, res) => {
 	Review.findByIdAndUpdate(req.params.id, req.body)
 		.then(review =>{
 			res.redirect(`/reviews/${review.id}`);
@@ -58,7 +48,7 @@ router.put("/reviews/:id", (req, res) => {
 		});
 });
 
-router.delete("/reviews/:id", (req, res) => {
+router.delete("/:id", (req, res) => {
 	console.log("delete review");
 	Review.findByIdAndRemove(req.params.id)
 		.then(review => {
