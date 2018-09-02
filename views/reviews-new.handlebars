@@ -1,7 +1,13 @@
-<form method="POST" action="/reviews">
-	{{> reviews-form }}
+<div class="row">
+	<div class="col-sm-6 col-sm-offset-3">
 
-	<p>
-		<button type="submit">Save review</button>
-	</p>
-</form>
+		<form method="POST" action="/reviews">
+			{{> reviews-form }}
+
+			<div class="form-group">
+				<button class="btn btn-primary" type="submit">Save review</button>
+			</div>
+		</form>
+	</div>
+</div>
+
