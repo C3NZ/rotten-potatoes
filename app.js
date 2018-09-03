@@ -7,7 +7,7 @@ const methodOverride = require("method-override");
 //Db
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rotten-potatoes", {useNewUrlParser: true});
-
+ 
 //Routers
 const home = require("./controllers/home");
 const reviews = require("./controllers/reviews");
