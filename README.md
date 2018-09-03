@@ -6,3 +6,5 @@ Project for Make-school's BEW 1.1 class.
 1. `git clone https://github.com/C3NZ/rotten-potatoes.git`
 2. now inside the package, run `npm install`
 3. `npm run start` assuming mongod is running and all dependencies are installed.
+
+Or you can interact with the app [here](https://rotten-potatoes-vm.herokuapp.com/)
