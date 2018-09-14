@@ -1,2 +1,8 @@
-<h1>Hello movies</h1>
+<h1>Movies currently playing</h1>
+
+{{#each movies}}
+	<div class="block">
+		<img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="{{this.original_title}}">
+	</div>
+{{/each}}
 
