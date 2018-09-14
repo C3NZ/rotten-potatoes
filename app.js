@@ -12,6 +12,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rotten-potatoes
 const home = require("./controllers/home");
 const reviews = require("./controllers/reviews");
 const comments = require("./controllers/comments");
+const movies = require("./controllers/movies");
 
 //handlebar setup
 var exphbs = require("express-handlebars");
@@ -21,7 +22,7 @@ app.set("view engine", "handlebars");
 //Middleware and route configuration
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
-app.use('/', home);
+app.use('/', movies);
 app.use('/reviews', reviews);
 app.use('/reviews/comments', comments);
 
