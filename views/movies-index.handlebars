@@ -1,8 +1,47 @@
-<h1>Movies currently playing</h1>
+<style>
+	.container {
+		display: flex;
+		flex-direction: column;
+	}
 
-{{#each movies}}
-	<div class="block">
-		<img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="{{this.original_title}}">
-	</div>
-{{/each}}
+	.movie-container {
+		margin-bottom: 20px;
+		display: flex;
+		border: 2px solid black;
+		border-radius: 10px;
+	}
+	
+	.movie-image {
+		transition-timing-function: linear;
+	}
+	.movie-image:hover {
+		
+	}
 
+	.info {
+		text-align: center;
+		width: 100%;
+	}
+
+	.movie-title {
+		padding-bottom: 10px;	
+	}
+
+	.movie-desc {
+		font-size: 16px;
+	}
+</style>
+<div class="container">
+	<h1>Movies currently playing</h1>
+	{{#each movies}}
+		<div class="movie-container">
+			<div class="movie-img">
+				<a href="/movies/{{this.id}}" ><img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="{{this.original_title}}"></a>
+			</div>
+			<div class="info">
+				<h2 class="movie-title">{{this.original_title}}</h2>
+				<p class="movie-desc">{{this.overview}}</p>
+			</div>
+		</div>
+	{{/each}}
+</div>
