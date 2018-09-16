@@ -1,22 +1,36 @@
 <style>
-	.container {
+	h1 {
+		text-align: center;
+	}
+	.playing-container {
 		display: flex;
-		flex-direction: column;
+		flex-direction:row;
+		flex-wrap: wrap;
+		justify-content: space-between;
 	}
 
 	.movie-container {
 		margin-bottom: 20px;
 		display: flex;
+		justify-content: center;
 		border: 2px solid black;
 		border-radius: 10px;
+		transition-duration: .5s;
+		transition-timing-function: linear;
+		box-shadow: 10px 10px 5px grey;
 	}
 	
 	.movie-image {
 		transition-timing-function: linear;
 	}
-	.movie-image:hover {
-		
+	.movie-container:hover {
+		box-shadow: 15px 15px 5px black;	
 	}
+
+	.movie-image:hover {
+		width: 100%
+	}
+
 
 	.info {
 		text-align: center;
@@ -31,16 +45,13 @@
 		font-size: 16px;
 	}
 </style>
-<div class="container">
-	<h1>Movies currently playing</h1>
+
+<h1>Movies currently playing</h1>
+<div class="playing-container">
 	{{#each movies}}
 		<div class="movie-container">
 			<div class="movie-img">
 				<a href="/movies/{{this.id}}" ><img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="{{this.original_title}}"></a>
-			</div>
-			<div class="info">
-				<h2 class="movie-title">{{this.original_title}}</h2>
-				<p class="movie-desc">{{this.overview}}</p>
 			</div>
 		</div>
 	{{/each}}
