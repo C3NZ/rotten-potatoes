@@ -1,18 +1,28 @@
 <style>
 	h1 {
 		text-align: center;
+		font-size: 6em;
 	}
-	.playing-container {
+
+	h2 {
+		text-align: center;
+		font-size: 4em;
+	}
+
+	.genre-container {
 		display: flex;
-		flex-direction:row;
+		flex-direction: row;
 		flex-wrap: wrap;
-		justify-content: space-between;
+		justify-content: center;
 	}
 
 	.movie-container {
+		display: block;
+		max-width: 300px;
+		max-height: 500px;
 		margin-bottom: 20px;
-		display: flex;
-		justify-content: center;
+		margin-left: 10px;
+		margin-right: 10px;
 		border: 2px solid black;
 		border-radius: 10px;
 		transition-duration: .5s;
@@ -20,21 +30,13 @@
 		box-shadow: 10px 10px 5px grey;
 	}
 	
-	.movie-image {
-		transition-timing-function: linear;
+	img {
+		width: 100%;
+		height: auto;
+		object-fit: cover;
 	}
 	.movie-container:hover {
 		box-shadow: 15px 15px 5px black;	
-	}
-
-	.movie-image:hover {
-		width: 100%
-	}
-
-
-	.info {
-		text-align: center;
-		width: 100%;
 	}
 
 	.movie-title {
@@ -47,12 +49,25 @@
 </style>
 
 <h1>Movies currently playing</h1>
-<div class="playing-container">
-	{{#each movies}}
-		<div class="movie-container">
-			<div class="movie-img">
-				<a href="/movies/{{this.id}}" ><img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="{{this.original_title}}"></a>
-			</div>
+
+{{#each genres}}
+	<div class="overall-container">
+		<div class="genre-title" id="{{this.name}}">
+			<h2>{{this.name}} movies</h2>
 		</div>
-	{{/each}}
+		<div class="genre-container">
+			{{#each ../movies}}
+				{{#compare ../this.id this.genre_ids }}
+					<div class="movie-container">
+						<div class="movie-img">
+							<a href="/movies/{{this.id}}" ><img src="https://image.tmdb.org/t/p/w500/{{this.poster_path}}" alt="{{this.original_title}}"></a>
+						</div>
+					</div>
+				{{/compare}}
+			{{/each}}
+		</div>
+		<br>
+	</div>
+{{/each}}
 </div>
+	
