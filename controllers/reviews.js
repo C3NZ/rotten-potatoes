@@ -1,22 +1,24 @@
 //Router for interacting with the reviews endpoint
+//The endpoint is /movies/:movieId/reviews
+
 const express = require("express");
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 const Review = require("../models/review");
 const Comment = require("../models/comment");
 
-router.post("/", (req, res) => {
-	Review.create(req.body)
-		.then(review => {
-			res.redirect(`/reviews/${review._id}`);
-		})
-		.catch(err => {
-			console.log(err.message)
-		});
-});
+//Return the form for creating a new review
+router.get('/new', (req, res) => {
+	res.render("reviews-new", { movieId: req.params.movieId});
+}); 
 
-router.get("/new", (req, res) => {
-	res.render("reviews-new", {});
+//Create a new review
+router.post("/", (req, res) => { 
+	Review.create(req.body).then(review => {
+		res.redirect(`/movies/${review.movieId}`);
+	}).catch(err => {
+		console.log(err);
+	});
 });
 
 router.get("/:id", (req, res) => {

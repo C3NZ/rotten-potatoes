@@ -4,6 +4,7 @@ const app = express();
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const path = require("path");
+
 //Db
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rotten-potatoes", {useNewUrlParser: true});
@@ -24,7 +25,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use('/', movies);
-app.use('/reviews', reviews);
+app.use('/movies/:movieId/reviews', reviews);
 app.use('/reviews/comments', comments);
 
 //Server start
