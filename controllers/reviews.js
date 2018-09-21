@@ -21,6 +21,7 @@ router.post("/", (req, res) => {
 	});
 });
 
+//Return a review 
 router.get("/:id", (req, res) => {
 	Review.findById(req.params.id)
 		.then(review => {
@@ -34,10 +35,11 @@ router.get("/:id", (req, res) => {
 		});
 });
 
+//updating a 
 router.put("/:id", (req, res) => {
 	Review.findByIdAndUpdate(req.params.id, req.body)
 		.then(review =>{
-			res.redirect(`/reviews/${review.id}`);
+			res.redirect(`/movies/${review.movieId}/reviews/${review.id}`);
 		})
 		.catch(err => {
 			console.log(err.message);
@@ -45,7 +47,6 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-	console.log("delete review");
 	Review.findByIdAndRemove(req.params.id)
 		.then(review => {
 			res.redirect(`/movies/${review.movieId}`);
