@@ -7,10 +7,10 @@ const Comment = require("../models/comment");
 router.post("/", (req, res) => {
 	Comment.create(req.body)
 		.then(comment => {
-			res.redirect(`/reviews/${comment.reviewId}`);
+			res.status(200).send({ comment: comment})
 		})
 		.catch(err => {
-			console.log(err);
+			res.status(400).send({err:err});
 		});
 });
 
