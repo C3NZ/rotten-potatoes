@@ -9,6 +9,8 @@ const router = express.Router();
 const movieDb = require("moviedb-promise");
 const moviedb = new movieDb("c45bddf90209a92e0e385fcae855b53c")
 
+const Reviews = require("../models/review")
+
 //SHOW all movies (index page)
 router.get('/', (req, res) => {
 	moviedb.miscNowPlayingMovies().then(movies => {
@@ -47,7 +49,7 @@ router.get('/movies/:id', (req, res) => {
 				res.render('movies-show', {movie: movie, reviews: reviews})
 			}
 		}).catch(err => {console.log(err)});
-	}).catch(err => {console.log(error)});
+	}).catch(err => {console.log(err)});
 });
 
 module.exports = router;

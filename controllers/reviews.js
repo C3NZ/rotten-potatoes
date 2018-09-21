@@ -48,7 +48,7 @@ router.delete("/:id", (req, res) => {
 	console.log("delete review");
 	Review.findByIdAndRemove(req.params.id)
 		.then(review => {
-			res.redirect('/');
+			res.redirect(`/movies/${review.movieId}`);
 		})
 		.catch(err => {
 			console.log(err.message);
