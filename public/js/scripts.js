@@ -8,34 +8,36 @@ document.getElementById("newComment").addEventListener("submit", e => {
 		comment[inputs[i].name] = inputs[i].value;
 	}
 
-	axios.post('/reviews/comments', comment)
-		.then(function(response) {
-			console.log(response)
-		})
-		.catch(function(error) {
-			console.log(error);
-			alert('There was a problem saving your comment. Please try again.');
-		})
+	let commentData = new FormData();
+	commentData.append('title', document.getElementById('comment-title').value)
+	commentData.append('content', document.getElementById('comment-content').value)
+	console.log(commentData)
+	const options ={
+		headers: {
+			'Content-Type':'multipart/form-data'
+		}
+	}
 
-	axios.post('/user', comment)
-		.then(function(response) {
-			console.log(response);
-			this.reset();
+	document.getElementById('comment-title').value = '';
+	document.getElementById('comment-content').value = '';
+	console.log(options);
 
-			document.getElementById('comments').prepend(
-				`
-					<div class="card">
-						<div class="card-block">
-							<h4 class="card-fowl">${response.title}</h4>
-							<p class="card-text">${response.content}</p>
-							<p>
-								<form method="POST" action="/reviews/comments/${response._id}?_method=DELETE">
-									<button class="btn btn-link" type="submit">Delete</button>
-								</form>
-							</p>
-						</div>
-					</div>
-				`
-			);
-		})
+	axios.post('/reviews/comments', comment).then(function(response) {
+		
+		comments = document.getElementById('comments')
+		comments.innerHTML = 
+			`
+			<div class="card">
+				<div class="card-block">
+					<h4 class="card-fowl">${response.data.comment.title}</h4>
+					<p class="card-text">${response.data.comment.content}</p>
+					<p>
+						<form method="POST" action="/reviews/comments/${response.data.comment_id}?_method=DELETE">
+						<button class="btn btn-link" type="submit">Delete</button>
+						</form>
+					</p>
+				</div>
+			</div>
+			` + comments.innerHTML;
+	});
 })

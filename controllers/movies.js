@@ -1,6 +1,5 @@
 //index & movies router module
 
-
 //Express and the router to attach to express
 const express = require("express");
 const router = express.Router();

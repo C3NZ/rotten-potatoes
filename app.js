@@ -23,6 +23,7 @@ app.set("view engine", "handlebars");
 //Middleware and route configuration
 app.use('/public', express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(methodOverride("_method"));
 app.use('/', movies);
 app.use('/movies/:movieId/reviews', reviews);

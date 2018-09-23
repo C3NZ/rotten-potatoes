@@ -5,8 +5,9 @@ const router = express.Router();
 const Comment = require("../models/comment");
 
 router.post("/", (req, res) => {
-	Comment.create(req.body)
+	console.log(req)
 		.then(comment => {
+			console.log(comment)
 			res.status(200).send({ comment: comment})
 		})
 		.catch(err => {

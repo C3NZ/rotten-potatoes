@@ -23,10 +23,9 @@ router.post("/", (req, res) => {
 
 //Return a review 
 router.get("/:id", (req, res) => {
-	Review.findById(req.params.id)
-		.then(review => {
-			Comment.find({reviewId: review._id})
-				.then(comments => {
+	Review.findById(req.params.id).then(review => {
+		Comment.find({reviewId: review._id}).then(comments => {
+				console.log(review._id)
 					res.render("reviews-show", { review:review, comments:comments });
 				});		
 		})
