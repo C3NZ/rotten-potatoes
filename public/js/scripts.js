@@ -25,6 +25,7 @@ document.getElementById("newComment").addEventListener("submit", e => {
 	axios.post('/reviews/comments', comment).then(function(response) {
 		
 		comments = document.getElementById('comments')
+		console.log(response.data);
 		comments.innerHTML = 
 			`
 			<div class="card">
@@ -32,8 +33,8 @@ document.getElementById("newComment").addEventListener("submit", e => {
 					<h4 class="card-fowl">${response.data.comment.title}</h4>
 					<p class="card-text">${response.data.comment.content}</p>
 					<p>
-						<form method="POST" action="/reviews/comments/${response.data.comment_id}?_method=DELETE">
-						<button class="btn btn-link" type="submit">Delete</button>
+						<form method="POST" action="/reviews/comments/${response.data.comment._id}?_method=DELETE">
+						<button class="btn btn-primary" type="submit">Delete</button>
 						</form>
 					</p>
 				</div>

@@ -3,11 +3,11 @@ const express = require("express");
 const router = express.Router();
 
 const Comment = require("../models/comment");
+const Review = require("../models/review");
 
 router.post("/", (req, res) => {
-	console.log(req)
-		.then(comment => {
-			console.log(comment)
+	console.log(req.body)
+	Comment.create(req.body).then(comment => {
 			res.status(200).send({ comment: comment})
 		})
 		.catch(err => {
@@ -19,7 +19,9 @@ router.delete("/:id", (req, res) => {
 	console.log("DELETE comment");
 	Comment.findByIdAndRemove(req.params.id)
 		.then(comment => {
-			res.redirect(`/reviews/${comment.reviewId}`);
+			Review.findById(comment.reviewId).then(review => {
+				res.redirect(`/movies/${review.movieId}/reviews/${review._id}`)
+			})
 		})
 		.catch(err => {
 			console.log(err);
