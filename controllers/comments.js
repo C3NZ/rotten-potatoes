@@ -20,11 +20,13 @@ router.delete("/:id", (req, res) => {
 	Comment.findByIdAndRemove(req.params.id)
 		.then(comment => {
 			Review.findById(comment.reviewId).then(review => {
-				res.redirect(`/movies/${review.movieId}/reviews/${review._id}`)
+				res.status(200).send(comment)
+				//res.redirect(`/movies/${review.movieId}/reviews/${review._id}`)
 			})
 		})
 		.catch(err => {
 			console.log(err);
+			res.status(404).send(err);
 		});
 });
 
