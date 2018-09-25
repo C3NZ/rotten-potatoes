@@ -4,7 +4,8 @@
 		<p class="card-body">{{this.content}}</p>
 		<p>
 			<form method="POST" action="/reviews/comments/{{this._id}}?_method=DELETE">
-				<button class="btn btn-primary delete-comment" data-comment-id="${{this._id}}">Delete</button>
+				<button onclick="delete({{this._id}})" class="btn btn-primary delete-comment" data-comment-id="{{this._id}}">Delete</button>
+			
 			</form>
 		</p>
 	</div>

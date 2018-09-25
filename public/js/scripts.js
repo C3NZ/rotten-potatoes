@@ -34,7 +34,7 @@ document.getElementById("newComment").addEventListener("submit", e => {
 					<p class="card-text">${comment.content}</p>
 					<p>
 						<form method="POST" action="/reviews/comments/${comment._id}?_method=DELETE">
-						<button class="btn btn-primary delete-comment" id="${comment._id} "data-comment-id="${comment._id}">Delete</button>
+						<button onclick=class="btn btn-primary delete-comment" id="${comment._id} "data-comment-id="${comment._id}">Delete</button>
 						</form>
 					</p>
 				</div>
@@ -43,13 +43,16 @@ document.getElementById("newComment").addEventListener("submit", e => {
 	}).catch(error => {
 		console.log(error)
 	});
+});
 
-})
-
-document.querySelector('.delete-comment').addEventListener('click', e => {
+function deleteComment(commentId) {
 	console.log('click');
-	let commentId = e.getAttribute('data-comment-id');
-	axios.delete(`/reviews/comments/${commentId})`).then(response => {
+	axios.delete(`/reviews/comments/${commentId}`)
+}
+document.querySelector('.delete-comment').addEventListener('click', e => {
+		console.log('click');
+		let commentId = e.getAttribute('data-comment-id');
+		axios.delete(`/reviews/comments/${commentId})`).then(response => {
 		console.log(response)
 		comment = document.getElementById(commentId);
 		comment.parentNode.removeChild(comment);
@@ -57,4 +60,4 @@ document.querySelector('.delete-comment').addEventListener('click', e => {
 		console.log(error)
 		alert("there was an error deleting this comment");
 	})
-})
+	});

@@ -17,17 +17,12 @@ router.post("/", (req, res) => {
 
 router.delete("/:id", (req, res) => {
 	console.log("DELETE comment");
-	Comment.findByIdAndRemove(req.params.id)
-		.then(comment => {
-			Review.findById(comment.reviewId).then(review => {
-				res.status(200).send(comment)
-				//res.redirect(`/movies/${review.movieId}/reviews/${review._id}`)
-			})
-		})
-		.catch(err => {
-			console.log(err);
-			res.status(404).send(err);
-		});
+	Comment.findByIdAndRemove(req.params.id).then(comment => {
+		res.status(200).send({comment : comment})
+	}).catch(err => {
+		console.log(err);
+		res.status(404).send(err);
+	});
 });
 
 module.exports = router;
