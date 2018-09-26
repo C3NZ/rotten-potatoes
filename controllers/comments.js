@@ -5,8 +5,8 @@ const router = express.Router();
 const Comment = require("../models/comment");
 const Review = require("../models/review");
 
+//Create a new comment
 router.post("/", (req, res) => {
-	console.log(req.body)
 	Comment.create(req.body).then(comment => {
 			res.status(200).send({ comment: comment})
 		})
@@ -15,8 +15,8 @@ router.post("/", (req, res) => {
 		});
 });
 
+//Delete a comment
 router.delete("/:id", (req, res) => {
-	console.log("DELETE comment");
 	Comment.findByIdAndRemove(req.params.id).then(comment => {
 		res.status(200).send({comment : comment})
 	}).catch(err => {

@@ -8,19 +8,8 @@ document.getElementById("newComment").addEventListener("submit", e => {
 		comment[inputs[i].name] = inputs[i].value;
 	}
 
-	let commentData = new FormData();
-	commentData.append('title', document.getElementById('comment-title').value)
-	commentData.append('content', document.getElementById('comment-content').value)
-	console.log(commentData)
-	const options ={
-		headers: {
-			'Content-Type':'multipart/form-data'
-		}
-	}
-
 	document.getElementById('comment-title').value = '';
 	document.getElementById('comment-content').value = '';
-	console.log(options);
 
 	axios.post('/reviews/comments', comment).then(function(response) {
 		
@@ -44,11 +33,8 @@ document.getElementById("newComment").addEventListener("submit", e => {
 });
 
 function deleteComment(commentId) {
-	console.log('click');
-	console.log(commentId);
 	axios.delete(`/reviews/comments/${commentId}`).then(response => {
 		comment = document.getElementById(commentId);
-		console.log(comment)
 		comment.parentNode.removeChild(comment);
 	}).catch(error => {
 		console.log(error);

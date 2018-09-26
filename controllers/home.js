@@ -5,6 +5,7 @@ const router = express.Router();
 
 const Review = require("../models/review");
 
+//Old index route`
 router.get("/", (req, res) => {
 	Review.find()
 		.then(reviews => {

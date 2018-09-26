@@ -21,40 +21,36 @@ router.post("/", (req, res) => {
 	});
 });
 
-//Return a review 
+//Return a specific review
 router.get("/:id", (req, res) => {
 	Review.findById(req.params.id).then(review => {
 		Comment.find({reviewId: review._id}).then(comments => {
-				console.log(review._id)
-					res.render("reviews-show", { review:review, comments:comments });
-				});		
-		})
-		.catch(err => {
-			console.log(err);
-		});
+			res.render("reviews-show", { review:review, comments:comments });
+		});		
+	}).catch(err => {
+		console.log(err);
+	});
 });
 
-//updating a 
+//update a specific review and send the user back to the reivew
 router.put("/:id", (req, res) => {
-	Review.findByIdAndUpdate(req.params.id, req.body)
-		.then(review =>{
-			res.redirect(`/movies/${review.movieId}/reviews/${review.id}`);
-		})
-		.catch(err => {
-			console.log(err.message);
-		});
+	Review.findByIdAndUpdate(req.params.id, req.body).then(review =>{
+		res.redirect(`/movies/${review.movieId}/reviews/${review.id}`);
+	}).catch(err => {
+		console.log(err.message);
+	});
 });
 
+//Delete a specific review and send the user back to the movie page.
 router.delete("/:id", (req, res) => {
-	Review.findByIdAndRemove(req.params.id)
-		.then(review => {
-			res.redirect(`/movies/${review.movieId}`);
-		})
-		.catch(err => {
-			console.log(err.message);
-		});
+	Review.findByIdAndRemove(req.params.id).then(review => {
+		res.redirect(`/movies/${review.movieId}`);
+	}).catch(err => {
+		console.log(err.message);
+	});
 });
 
+//Get the edit form for the review
 router.get("/:id/edit", (req, res) => {
 	Review.findById(req.params.id, function(err, review){ 
 		res.render("reviews-edit", { review : review });

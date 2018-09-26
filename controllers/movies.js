@@ -14,6 +14,7 @@ const Reviews = require("../models/review")
 router.get('/', (req, res) => {
 	moviedb.miscNowPlayingMovies().then(movies => {
 		moviedb.genreMovieList().then(genres => {
+			//render the index with movies categorized in specific genres.
 			res.render("movies-index", { 
 				movies: movies.results,
 				genres: genres.genres,
