@@ -6,7 +6,7 @@ const router = express.Router();
 
 //Movie db access
 const movieDb = require("moviedb-promise");
-const moviedb = new movieDb("c45bddf90209a92e0e385fcae855b53c")
+const moviedb = new movieDb(process.env.MOVIEDB_KEY);
 
 const Reviews = require("../models/review")
 

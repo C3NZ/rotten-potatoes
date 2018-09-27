@@ -5,6 +5,10 @@ const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 const path = require("path");
 
+if(!process.env.PORT){
+	require('dotenv').config();
+}
+
 //Db
 const mongoose = require("mongoose");
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/rotten-potatoes", {useNewUrlParser: true});
